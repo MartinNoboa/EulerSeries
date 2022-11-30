@@ -3,20 +3,20 @@
 * Programación avanzada: Proyecto final
 * Fecha: 30-Nov-2022
 * Autor: A01704052 Martin Noboa
-* Descripción: Implementacion secuencial de la serie de Euler en Java Fork Join
+* Descripción: Implementacion secuencial de la serie de Nilkantha en Java Fork Join
 *
 *--------------------------------------------------------------*/
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 
-public class EulerForkJoin extends RecursiveTask<Double> {
+public class NilkanthaForkJoin extends RecursiveTask<Double> {
 	private static final int SIZE = 100_000_000;
 	private static final int MIN = 10_000;
 	private double result,n,sign;
 	private int start, end;
 
-	public EulerForkJoin(int start, int end) {
+	public NilkanthaForkJoin(int start, int end) {
 		this.start = start;
 		this.end = end;
 	}
@@ -37,9 +37,9 @@ public class EulerForkJoin extends RecursiveTask<Double> {
 			return computeDirectly();
 		} else {
 			int mid = start + ((end - start) / 2);
-			EulerForkJoin lowerMid = new EulerForkJoin(start, mid);
+			NilkanthaForkJoin lowerMid = new NilkanthaForkJoin(start, mid);
 			lowerMid.fork();
-			EulerForkJoin upperMid = new EulerForkJoin(mid, end);
+			NilkanthaForkJoin upperMid = new NilkanthaForkJoin(mid, end);
 			return (upperMid.compute() + lowerMid.join());
 		}
 
@@ -63,7 +63,7 @@ public class EulerForkJoin extends RecursiveTask<Double> {
 			startTime = System.currentTimeMillis();
 
 			pool = new ForkJoinPool(Utils.MAXTHREADS);
-			res = pool.invoke(new EulerForkJoin(0, SIZE));
+			res = pool.invoke(new NilkanthaForkJoin(0, SIZE));
 			stopTime = System.currentTimeMillis();
 
 			acum += (stopTime - startTime);

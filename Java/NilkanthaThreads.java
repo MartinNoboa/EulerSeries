@@ -3,17 +3,17 @@
 * Programación avanzada: Proyecto final
 * Fecha: 30-Nov-2022
 * Autor: A01704052 Martin Noboa
-* Descripción: Implementacion secuencial de la serie de Euler en Java
+* Descripción: Implementacion secuencial de la serie de Nilkantha en Java
 *
 *--------------------------------------------------------------*/
 
 
-public class EulerThreads extends Thread {
+public class NilkanthaThreads extends Thread {
 	private static final int SIZE = 100_000_000;
 	private double result,n,sign;
 	private int end;
 
-	public EulerThreads(int blockSize, int n,double s) {
+	public NilkanthaThreads(int blockSize, int n,double s) {
 		this.n = n;
 		this.sign = s;
 		this.result = 0;
@@ -42,7 +42,7 @@ public class EulerThreads extends Thread {
 		double res = 0;
 		double s = 1;
 
-		EulerThreads threads[] = new EulerThreads[Utils.MAXTHREADS];
+		NilkanthaThreads threads[] = new NilkanthaThreads[Utils.MAXTHREADS];
 		int blockSize = SIZE / Utils.MAXTHREADS;
 
 		acum = 0;
@@ -56,7 +56,7 @@ public class EulerThreads extends Thread {
 				if ((j-1) % 2 == 0){
 					s = -1;
 				}
-				threads[j-1] = new EulerThreads(blockSize, (2+2*j),1);
+				threads[j-1] = new NilkanthaThreads(blockSize, (2+2*j),1);
 				threads[j-1].start();
 			}
 			try {

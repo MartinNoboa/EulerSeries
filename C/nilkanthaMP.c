@@ -4,7 +4,7 @@
 
 #define SIZE 100000000
 
-double euler(double n, double sign) {
+double Nilkantha(double n, double sign) {
   double pi = 0;
   int i;
 
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 	ms = 0;
 	for (i = 0; i < N; i++) {
 		start_timer();
-		sum = euler(n, sign);
+		sum = Nilkantha(n, sign);
 		ms += stop_timer();
 	}
   sum += 3;

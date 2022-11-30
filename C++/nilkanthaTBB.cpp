@@ -3,7 +3,7 @@
 * Programación avanzada: Proyecto final
 * Fecha: 30-Nov-2022
 * Autor: A01704052 Martin Noboa
-* Descripción: Implementacion secuencial de la serie de Euler en C++ con TBB
+* Descripción: Implementacion secuencial de la serie de Nilkantha en C++ con TBB
 *
 *--------------------------------------------------------------*/
 
@@ -16,13 +16,13 @@
 using namespace std;
 // using namespace tbb;
 
-class EulerTBB {
+class NilkanthaTBB {
 private:
 	double result, sign,n;
 
 public:
-	EulerTBB(double s, double a) : sign(s), n(a),result(3) {}
-	// EulerTBB(int *a, int size) : A(a), size(size), sign(1.0),result(3.0), n(0) {}
+	NilkanthaTBB(double s, double a) : sign(s), n(a),result(3) {}
+	// NilkanthaTBB(int *a, int size) : A(a), size(size), sign(1.0),result(3.0), n(0) {}
     // Even(Even &obj,split) : A(obj.A), size(obj.size),result(0) {}
     
 	double getResult() const {
@@ -37,7 +37,7 @@ public:
 	// 	}
     // }
 
-	void euler () {
+	void Nilkantha () {
 		for (int i = 0; i <= SIZE; i++) {
 			for (int i = 0; i <= SIZE; i++) {
 				result = result + (sign * (4 / ((n) * (n + 1)* (n + 2))));
@@ -47,7 +47,7 @@ public:
 		}
 	}
 
-    void join(const EulerTBB &x) {
+    void join(const NilkanthaTBB &x) {
 		result += x.result;
 	}
 };
@@ -61,9 +61,9 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < N; i++) {
         // parallel_reduce(blocked_range<int>(0, SIZE), obj);
 		// result = obj.getResult();
-    	EulerTBB obj(1,2);
+    	NilkanthaTBB obj(1,2);
 		start_timer();
-		obj.euler();
+		obj.Nilkantha();
 		ms += stop_timer();
 		result = obj.getResult();
 	}

@@ -3,16 +3,16 @@
 * Programación avanzada: Proyecto final
 * Fecha: 30-Nov-2022
 * Autor: A01704052 Martin Noboa
-* Descripción: Implementacion secuencial de la serie de Euler en Java
+* Descripción: Implementacion secuencial de la serie de Nilkantha en Java
 *
 *--------------------------------------------------------------*/
 import java.util.*;
 
-public class Euler {
+public class Nilkantha {
 	private static final int SIZE = 100;
 	private double result,n,sign;
 
-	public Euler() {
+	public Nilkantha() {
 		this.n = 2;
 		this.sign = 1;
 		this.result = 3;
@@ -34,7 +34,7 @@ public class Euler {
 		long startTime, stopTime;
 		double acum = 0;
 
-		Euler e = new Euler();
+		Nilkantha e = new Nilkantha();
 		System.out.printf("Starting...\n");
 
 		for (int i = 0; i < 10; i++) {

@@ -3,7 +3,7 @@
 * Programación avanzada: Proyecto final
 * Fecha: 30-Nov-2022
 * Autor: A01704052 Martin Noboa
-* Descripción: Implementacion secuencial de la serie de Euler en C
+* Descripción: Implementacion secuencial de la serie de Nilkantha en C
 *
 *--------------------------------------------------------------*/
 
@@ -13,7 +13,7 @@
 
 #define SIZE 10000000
 
-double euler(double n, double sign) {
+double Nilkantha(double n, double sign) {
   double pi = 0;
   for (int i = 0; i <= SIZE; i++) {
         pi = pi + (sign * (4 / ((n) * (n + 1) * (n + 2))));
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	ms = 0;
 	for (i = 0; i < N; i++) {
 		start_timer();
-		result = euler(n, sign);
+		result = Nilkantha(n, sign);
 		ms += stop_timer();
 	}
   printf("Pi =  %0.9lf\n",result);
