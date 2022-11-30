@@ -1,63 +1,53 @@
-// =================================================================
-// Multiprocesadores
-// File: sumaPares.c
-// Author: Martin Noboa - A01704052
-// 		   Bernardo Estrada - A01704320
-// =================================================================
+/*----------------------------------------------------------------
+*
+* Programación avanzada: Proyecto final
+* Fecha: 30-Nov-2022
+* Autor: A01704052 Martin Noboa
+* Descripción: Implementacion secuencial de la serie de Euler en C++
+*
+*--------------------------------------------------------------*/
 
 
-#include <iostream>
-#include <iomanip>
-#include <climits>
-#include <algorithm>
+#include <bits/stdc++.h>
 #include "utils.h"
 
-const int SIZE = 1000000000; //1e9
+const int SIZE = 5; 
 
 using namespace std;
 
-class CountArray {
+class Euler {
 private:
-	int *array, size;
-	double result;
-
+	double result, sign, n;
 public:
-	CountArray(int *a, int s) : array(a), size(s) {}
+	Euler(double s, double a) : sign(s), n(a),result(3) {}
 
 	double getResult() const {
 		return result;
 	}
 
-	void calculate () {
-		result = 0;
-		for (int i = 0; i < size; i++) {
-			if(array[i]%2 == 0){
-				result += array[i];
-			}
+	void euler () {
+		for (int i = 0; i <= SIZE; i++) {
+			result = result + (sign * (4 / ((n) * (n + 1)* (n + 2))));
+			sign = sign * (-1);
+			n += 2;
+			
 		}
 	}
 };
 
 int main(int argc, char* argv[]) {
-	int *a;
 	double ms;
-
-	a = new int[SIZE];
-	fill_array(a, SIZE);
-	display_array("a", a);
 
 	cout << "Starting..." << endl;
 	ms = 0;
-	CountArray obj(a, SIZE);
-	for (int i = 0; i < N; i++) {
+	Euler obj(1, 2);
+	for (int i = 0; i < 10; i++) {
 		start_timer();
-		obj.calculate();
-
+		obj.euler();
 		ms += stop_timer();
 	}
-	cout << "sum = " << (long int) obj.getResult() << endl;
+	cout << "pi = " << (double) obj.getResult() << endl;
 	cout << "avg time = " << setprecision(15) << (ms / N) << " ms" << endl;
 
-	delete [] a;
 	return 0;
 }
