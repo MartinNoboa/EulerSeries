@@ -1,79 +1,59 @@
-// =================================================================
-//
-// File: Example4.java
-// Authors: Martin Noboa - A01704052
-// 		   Bernardo Estrada - A01704320
-// Description: This file contains the code to count the number of
-//				even numbers within an array. The time this implementation
-//				takes will be used as the basis to calculate the
-//				improvement obtained with parallel technologies.
-//
-//			This implementation uses Fork Join.
-//
-// Copyright (c) 2020 by Tecnologico de Monterrey.
-// All Rights Reserved. May be reproduced for any non-commercial
-// purpose.
-//
-// =================================================================
-// ======Outputs====================================================
-// Single Thread
-// sum = 941896832
-// avg time = 60.1 ms
-//
-// Fork Join
-// sum = 941896832
-// avg time =  43.6ms
-//
-// Speedup = 1.38x
+/*----------------------------------------------------------------
+*
+* Programación avanzada: Proyecto final
+* Fecha: 30-Nov-2022
+* Autor: A01704052 Martin Noboa
+* Descripción: Implementacion secuencial de la serie de Euler en Java Fork Join
+*
+*--------------------------------------------------------------*/
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 
-public class Example4 extends RecursiveTask<Integer> {
+public class EulerForkJoin extends RecursiveTask<Double> {
 	private static final int SIZE = 100_000_000;
 	private static final int MIN = 10_000;
-	private int array[];
+	private double result,n,sign;
 	private int start, end;
 
-	public Example4(int array[], int start, int end) {
-		this.array = array;
+	public EulerForkJoin(int start, int end) {
 		this.start = start;
 		this.end = end;
 	}
 
-	public Integer computeDirectly() {
-		int result = 0;
-		for (int i = start; i < end; i++){
-			if (array[i] % 2 == 0){
-				result += array[i];
-			}
+	public Double computeDirectly() {
+		double result = 0;
+		for (int i = start; i < SIZE; i++){
+			this.result = this.result + (this.sign * (4 / ((this.n) * (this.n + 1) * (this.n + 2))));
+			this.sign = this.sign * (-1);
+			this.n += 2;
 		}
 		return result;
 	}
 
 	@Override
-	protected Integer compute() {
+	protected Double compute() {
 		if ((end - start) <= MIN) {
 			return computeDirectly();
 		} else {
 			int mid = start + ((end - start) / 2);
-			Example4 lowerMid = new Example4(array, start, mid);
+			EulerForkJoin lowerMid = new EulerForkJoin(start, mid);
 			lowerMid.fork();
-			Example4 upperMid = new Example4(array, mid, end);
+			EulerForkJoin upperMid = new EulerForkJoin(mid, end);
 			return (upperMid.compute() + lowerMid.join());
 		}
 
 	}
 
+	public double getResult() {
+		return result;
+	}
+
 	public static void main(String args[]) {
-		int array[] = new int[SIZE];
 		long startTime, stopTime;
 		double acum = 0;
-		int res = 0;
+		double res = 0;
 		ForkJoinPool pool;
-
-		Utils.fillArray(array);
-		Utils.displayArray("array", array);
 
 		acum = 0;
 		System.out.printf("Starting with %d threads\n", Utils.MAXTHREADS);
@@ -83,7 +63,7 @@ public class Example4 extends RecursiveTask<Integer> {
 			startTime = System.currentTimeMillis();
 
 			pool = new ForkJoinPool(Utils.MAXTHREADS);
-			res = pool.invoke(new Example4(array, 0, array.length));
+			res = pool.invoke(new EulerForkJoin(0, SIZE));
 			stopTime = System.currentTimeMillis();
 
 			acum += (stopTime - startTime);

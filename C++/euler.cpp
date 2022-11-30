@@ -11,7 +11,7 @@
 #include <bits/stdc++.h>
 #include "utils.h"
 
-const int SIZE = 5; 
+const int SIZE = 1000000; 
 
 using namespace std;
 

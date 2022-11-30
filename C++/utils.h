@@ -24,7 +24,7 @@
 #define MMIN(a,b) (((a)<(b))?(a):(b))
 #define MMAX(a,b) (((a)>(b))?(a):(b))
 
-#define N 				10
+#define N 			10
 #define DISPLAY		100
 #define TOP_VALUE	10000
 
@@ -88,7 +88,7 @@ void fill_array(int *array, int size) {
 
 	srand(time(0));
 	for (i = 0; i < size; i++) {
-		array[i] = (i % TOP_VALUE) + 1;
+		array[i] = i + 1;
 	}
 }
 
