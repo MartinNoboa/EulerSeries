@@ -23,9 +23,11 @@ public class Euler {
 	}
 
 	public void calculate() {
-		this.result = this.result + (this.sign * (4 / ((this.n) * (this.n + 1) * (this.n + 2))));
-        this.sign = this.sign * (-1);
-        this.n += 2;
+		for (int i = 0; i <= 1000000; i++) {
+			this.result = this.result + (this.sign * (4 / ((this.n) * (this.n + 1) * (this.n + 2))));
+			this.sign = this.sign * (-1);
+			this.n += 2;
+		}
 	}
 
 	public static void main(String args[]) {
@@ -41,7 +43,7 @@ public class Euler {
 			stopTime = System.currentTimeMillis();
 			acum += (stopTime - startTime);
 		}
-		System.out.printf("sum = %.8f\n", e.getResult());
+		System.out.printf("Pi = %.8f\n", e.getResult());
 		System.out.printf("avg time = %.10f ms\n", (acum / 10));
 	}
 }

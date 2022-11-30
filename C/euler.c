@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 		result = euler(n, sign);
 		ms += stop_timer();
 	}
-  printf("The approximation of Pi is %0.9lf\n",result);
+  printf("Pi =  %0.9lf\n",result);
 	printf("avg time = %.5lf ms\n", (ms / N));
   
   return 0;
