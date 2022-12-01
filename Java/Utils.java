@@ -10,18 +10,13 @@
 // purpose.
 //
 // =================================================================
-
 import java.util.Random;
-
 public class Utils {
 	private static final int DISPLAY = 100;
 	public static final int TOP_VALUE = 10_000;
 	public static final Random r = new Random();
-
-	// public static final int MAXTHREADS = 1;
 	public static final int MAXTHREADS = Runtime.getRuntime().availableProcessors();
-	public static final int N = 10;
-
+	public static final int N = 5;
 	// =================================================================
 	// Initializes an array with random values between 1 and TOP_VALUE.
 	//
@@ -33,7 +28,6 @@ public class Utils {
 			array[i] = r.nextInt(TOP_VALUE) + 1;
 		}
 	}
-
 	// =================================================================
 	// Initializes an array with consecutive values of 1 and TOP_VALUE
 	// across all locations.
